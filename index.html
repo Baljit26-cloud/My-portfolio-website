@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baljit Kaur | Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Typed.js for typing animation -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+    <!-- Custom Styles for animations and background - Updated for Soft Light Blue Theme -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f9ff; /* Sky-50 - A very light blue tint */
+            color: #334155; /* Slate-700 */
+        }
+
+        /* Simple scrollbar styling for a light theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e0f2f7; /* Lighter Blue Track */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0ea5e9; /* Sky-500 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8; /* Sky-400 */
+        }
+        
+        /* Styles for scroll-triggered animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Typing animation cursor color */
+        .typed-cursor {
+            color: #0ea5e9; /* Sky-500 */
+        }
+
+        /* Button glow effect - Adjusted for visibility on a light background */
+        .button-glow {
+            transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .button-glow:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px 5px rgba(14, 165, 233, 0.4); /* Sky-500 glow */
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Canvas for moving particle background -->
+    <canvas id="particle-canvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
+
+    <!-- Header & Navigation -->
+    <!-- UPDATED: Changed from bg-white/90 to bg-sky-100/80 for the soft blue monochrome look -->
+    <header class="bg-sky-100/80 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-900">My Portfolio</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-700 hover:text-sky-500 transition-colors">About</a>
+                <a href="#projects" class="text-gray-700 hover:text-sky-500 transition-colors">Projects</a>
+                <a href="#contact" class="text-gray-700 hover:text-sky-500 transition-colors">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-900">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-white">
+            <a href="#about" class="block py-2 text-gray-700 hover:text-sky-500">About</a>
+            <a href="#projects" class="block py-2 text-gray-700 hover:text-sky-500">Projects</a>
+            <a href="#contact" class="block py-2 text-gray-700 hover:text-sky-500">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16 relative z-10">
+
+        <!-- Hero Section -->
+        <section class="text-center min-h-[70vh] flex flex-col items-center justify-center">
+            <!-- Updated image source with the uploaded image -->
+            <img src="https://my-pic-26.edgeone.app/Screenshot%202025-09-27%20164927.png" alt="Baljit Kaur Profile Picture" class="w-32 h-32 rounded-full mb-6 shadow-xl border-4 border-sky-500/50 object-cover">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">Baljit Kaur</h1>
+            <p class="text-lg md:text-xl text-sky-600 font-medium mb-6 h-8 md:h-7"><span id="typed-subtitle"></span></p>
+            <p class="max-w-2xl mx-auto text-gray-600">
+                I'm passionate about building innovative solutions in the chemical and automation industries through process design and control systems.
+            </p>
+            <a href="#projects" class="mt-8 px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg shadow-lg hover:bg-sky-700 button-glow">
+                View My Work
+            </a>
+        </section>
+        
+        <!-- About Me Section -->
+        <section id="about" class="py-24 fade-in-section">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">About Me</h2>
+                <p id="about-me-text" class="text-gray-600 leading-relaxed">
+                    I'm a passionate Chemical Engineering student at Dr. B.R. Ambedkar NIT Jalandhar, driven by a deep curiosity for chemical processes and control systems. With hands-on experience in MATLAB, PID control, and simulation modeling, I'm eager to contribute to innovative solutions in the chemical and automation industries. Currently building strong foundations in process design, instrumentation, and interdisciplinary teamwork.
+                </p>
+                <div class="mt-12">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6">My Skills</h3>
+                    <div id="skills-list" class="flex flex-wrap justify-center gap-4">
+                        <!-- Updated skill tags for light theme -->
+                        <span class="bg-gray-200 text-sky-700 text-sm font-medium px-4 py-2 rounded-full">MATLAB</span>
+                        <span class="bg-gray-200 text-sky-700 text-sm font-medium px-4 py-2 rounded-full">Simulink</span>
+                        <span class="bg-gray-200 text-emerald-700 text-sm font-medium px-4 py-2 rounded-full">PID Controller</span>
+                        <span class="bg-gray-200 text-yellow-700 text-sm font-medium px-4 py-2 rounded-full">Control Systems Design</span>
+                        <span class="bg-gray-200 text-indigo-700 text-sm font-medium px-4 py-2 rounded-full">Programming</span>
+                        <span class="bg-gray-200 text-teal-700 text-sm font-medium px-4 py-2 rounded-full">CSTR Temperature Control</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section - Background set to transparent -->
+        <section id="projects" class="py-24 rounded-2xl -mx-6 px-6 fade-in-section">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">My Projects</h2>
+                
+                <div class="flex justify-center">
+                    <!-- Project Card 1 - Updated for light theme -->
+                    <div class="project-card bg-gray-50 rounded-xl shadow-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-sky-500/20 hover:shadow-2xl flex flex-col md:max-w-sm border border-gray-200">
+                        <img src="https://placehold.co/600x400/1e40af/ffffff?text=CSTR+Project" alt="CSTR Project Screenshot" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="project-title text-xl font-semibold mb-2 text-gray-900">CSTR Temperature Control using PID</h3>
+                            <p class="project-description text-gray-600 mb-4 text-sm flex-grow">Designed and implemented a PID-based temperature control system for a CSTR using MATLAB and Simulink. Successfully maintained temperature stability by dynamically adjusting heat input.</p>
+                            <div class="project-tech flex flex-wrap gap-2 mb-4">
+                                <!-- Updated tech tags for light theme -->
+                                <span class="text-xs bg-sky-100 text-sky-800 px-2 py-1 rounded-full">MATLAB</span>
+                                <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full">Simulink</span>
+                                <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">PID Control</span>
+                            </div>
+                            <div class="flex space-x-4 mt-auto pt-4">
+                                <a href="https://github.com/Baljit26-cloud" target="_blank" rel="noopener noreferrer" class="w-full text-center px-4 py-2 bg-gray-300 text-gray-800 text-sm font-medium rounded-md hover:bg-gray-400 transition-colors">View on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 fade-in-section">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+                <p class="text-gray-600 mb-8">
+                    I'm always open to new opportunities and collaborations. Feel free to reach out to me!
+                </p>
+                <a href="mailto:baljitk.cm.24@nitj.ac.in" class="inline-block px-8 py-4 bg-sky-600 text-white font-semibold rounded-lg shadow-lg hover:bg-sky-700 button-glow">
+                    Say Hello
+                </a>
+                <div class="flex justify-center space-x-6 mt-10">
+                    <!-- Updated social icons for light theme -->
+                    <a href="https://github.com/Baljit26-cloud" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-sky-500 transition-transform hover:scale-110">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/baljitkaur26" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-sky-500 transition-transform hover:scale-110">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-white/80 border-t border-gray-200 relative z-10">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+            <p>&copy; 2025 Baljit Kaur. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Animations and Mobile Menu -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- UI & ANIMATIONS ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+
+            if (document.getElementById('typed-subtitle')) {
+                new Typed('#typed-subtitle', {
+                    strings: ['Chemical Engineering Student', 'Process Control & Simulation', 'Aspiring Process Engineer'],
+                    typeSpeed: 50,
+                    backSpeed: 25,
+                    backDelay: 1500,
+                    loop: true,
+                    smartBackspace: true
+                });
+            }
+
+            const sections = document.querySelectorAll('.fade-in-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            sections.forEach(section => observer.observe(section));
+
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            let particlesArray;
+            function setCanvasSize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            setCanvasSize();
+
+            // Particle class (simplified for size)
+            class Particle {
+                constructor(x, y, dX, dY, s, c) { this.x=x; this.y=y; this.directionX=dX; this.directionY=dY; this.size=s; this.color=c; }
+                draw() { ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2,false); ctx.fillStyle=this.color; ctx.fill(); }
+                update() { if (this.x>canvas.width||this.x<0) this.directionX=-this.directionX; if (this.y>canvas.height||this.y<0) this.directionY=-this.directionY; this.x+=this.directionX; this.y+=this.directionY; this.draw(); }
+            }
+            
+            // Initialization function - Using subtle sky blue for particles on the light blue background
+            function initParticles() {
+                particlesArray=[]; let num=(canvas.height*canvas.width)/9e3;
+                for(let i=0;i<num;i++){ 
+                    let s=(Math.random()*2)+1,
+                        x=Math.random()*((innerWidth-s*2)-(s*2))+s*2,
+                        y=Math.random()*((innerHeight-s*2)-(s*2))+s*2,
+                        dX=(Math.random()*.4)-.2,
+                        dY=(Math.random()*.4)-.2,
+                        c='rgba(14, 165, 233, 0.2)'; /* Sky-500 at 20% opacity */ 
+                    particlesArray.push(new Particle(x,y,dX,dY,s,c)); 
+                }
+            }
+            
+            // Connection function - Using even more transparent sky blue for connecting lines
+            function connectParticles() {
+                let op=1; 
+                for (let a=0;a<particlesArray.length;a++){ 
+                    for (let b=a;b<particlesArray.length;b++){ 
+                        let dist=((particlesArray[a].x-particlesArray[b].x)*(particlesArray[a].x-particlesArray[b].x))+((particlesArray[a].y-particlesArray[b].y)*(particlesArray[a].y-particlesArray[b].y)); 
+                        if(dist<(canvas.width/7)*(canvas.height/7)){ 
+                            op=(1-(dist/2e4)) * 0.5; /* Max opacity is 50% for lines */
+                            ctx.strokeStyle=`rgba(14, 165, 233, ${op})`; /* Sky-500 for lines */ 
+                            ctx.lineWidth=1; 
+                            ctx.beginPath(); 
+                            ctx.moveTo(particlesArray[a].x,particlesArray[a].y); 
+                            ctx.lineTo(particlesArray[b].x,particlesArray[b].y); 
+                            ctx.stroke(); 
+                        }
+                    }
+                }
+            }
+            
+            // Animation function
+            function animateParticles() { requestAnimationFrame(animateParticles); ctx.clearRect(0,0,innerWidth,innerHeight); for(let i=0;i<particlesArray.length;i++){particlesArray[i].update();} connectParticles(); }
+            
+            window.addEventListener('resize', ()=>{ setCanvasSize(); initParticles(); });
+            initParticles();
+            animateParticles();
+        });
+    </script>
+</body>
+</html>
